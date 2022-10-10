@@ -2,6 +2,8 @@ package br.com.brenoxdmoon.designpatternsjava;
 
 import br.com.brenoxdmoon.designpatternsjava.core.desconto.CalculadoraDeDescontos;
 import br.com.brenoxdmoon.designpatternsjava.core.domain.entity.Orcamento;
+import br.com.brenoxdmoon.designpatternsjava.core.domain.service.EnviarEmail;
+import br.com.brenoxdmoon.designpatternsjava.core.domain.service.SalvarPedido;
 import br.com.brenoxdmoon.designpatternsjava.core.imposto.CalculadoraDeImpostos;
 import br.com.brenoxdmoon.designpatternsjava.core.imposto.impl.ICMS;
 import br.com.brenoxdmoon.designpatternsjava.core.pedido.handler.GeraPedidoHandler;
@@ -10,6 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 class TestesPadroesDeProjetoTest {
 
@@ -40,7 +43,7 @@ class TestesPadroesDeProjetoTest {
         Integer quantidadeItens = 1;
 
         GeraPedido geraPedido = new GeraPedido(cliente, valorOrcamento, quantidadeItens);
-        GeraPedidoHandler handler = new GeraPedidoHandler();
+        GeraPedidoHandler handler = new GeraPedidoHandler(List.of(new EnviarEmail(), new SalvarPedido()));
         handler.executa(geraPedido);
 
     }
