@@ -1,11 +1,17 @@
 package br.com.brenoxdmoon.designpatternsjava.core.domain.entity;
 
+import br.com.brenoxdmoon.designpatternsjava.core.situacao.EmAnalise;
+import br.com.brenoxdmoon.designpatternsjava.core.situacao.SituacaoOrcamento;
+import lombok.Data;
+
 import java.math.BigDecimal;
 
+@Data
 public class Orcamento {
 
     private BigDecimal valor;
     private Integer quantidadeItens;
+    private SituacaoOrcamento situacao;
 
     public Orcamento(BigDecimal valor) {
         this.valor = valor;
@@ -14,21 +20,24 @@ public class Orcamento {
     public Orcamento(BigDecimal valor, Integer quantidadeItens) {
         this.valor = valor;
         this.quantidadeItens = quantidadeItens;
+        this.situacao = new EmAnalise();
     }
 
-    public BigDecimal getValor() {
-        return valor;
+
+    public void aplicarDescontoExtra() {
+        this.situacao.calcularValorDescontoExtra(this);
     }
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
+    public void aprovar() {
+        this.situacao.aprovar(this);
     }
 
-    public Integer getQuantidadeItens() {
-        return quantidadeItens;
+    public void reprovar() {
+        this.situacao.reprovar(this);
     }
 
-    public void setQuantidadeItens(Integer quantidadeItens) {
-        this.quantidadeItens = quantidadeItens;
+    public void finalizar() {
+        this.situacao.finalizar(this);
     }
+
 }
