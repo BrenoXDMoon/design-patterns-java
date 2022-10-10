@@ -4,18 +4,17 @@ import br.com.brenoxdmoon.designpatternsjava.core.domain.entity.Orcamento;
 
 import java.math.BigDecimal;
 
-public class DescontoQuantidadeCincoOuMaior extends Desconco{
-
-    public DescontoQuantidadeCincoOuMaior(Desconco proximo) {
-        super(proximo);
-    }
+public class DescontoQuantidadeCincoOuMaior extends Desconto {
 
     @Override
-    public BigDecimal calcula(Orcamento orcamento){
-        if(orcamento.getQuantidadeItens() > 5){
-            return orcamento.getValor().multiply(new BigDecimal("0.1"));
-        }
-        return proximo.calcula(orcamento);
+    protected BigDecimal efetuaCalculo(Orcamento orcamento) {
+        return orcamento.getValor().multiply(new BigDecimal("0.1"));
+    }
+
+
+    @Override
+    public Boolean deveAplicar(Orcamento orcamento) {
+        return orcamento.getQuantidadeItens() > 5;
     }
 
 }

@@ -4,14 +4,14 @@ import br.com.brenoxdmoon.designpatternsjava.core.domain.entity.Orcamento;
 
 import java.math.BigDecimal;
 
-public class SemDesconto extends Desconco {
+public class SemDesconto extends Desconto {
 
-    public SemDesconto() {
-        super(null);
+
+    protected BigDecimal efetuaCalculo(Orcamento orcamento) {
+        return BigDecimal.ZERO;
     }
 
-    @Override
-    public BigDecimal calcula(Orcamento orcamento){
-        return BigDecimal.ZERO;
+    public Boolean deveAplicar(Orcamento orcamento) {
+        return false;
     }
 }

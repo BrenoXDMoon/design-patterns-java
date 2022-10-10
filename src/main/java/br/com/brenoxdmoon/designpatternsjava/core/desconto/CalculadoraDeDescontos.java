@@ -1,5 +1,6 @@
 package br.com.brenoxdmoon.designpatternsjava.core.desconto;
 
+import br.com.brenoxdmoon.designpatternsjava.core.desconto.cor.Desconto;
 import br.com.brenoxdmoon.designpatternsjava.core.desconto.cor.DescontoQuantidadeCincoOuMaior;
 import br.com.brenoxdmoon.designpatternsjava.core.desconto.cor.DescontoValorMaiorQueQuinhentos;
 import br.com.brenoxdmoon.designpatternsjava.core.desconto.cor.SemDesconto;
@@ -9,9 +10,13 @@ import java.math.BigDecimal;
 
 public class CalculadoraDeDescontos {
 
-    public BigDecimal calculaDesconto(Orcamento orcamento){
+    public BigDecimal calculaDesconto(Orcamento orcamento) {
 
-        return new DescontoQuantidadeCincoOuMaior(new DescontoValorMaiorQueQuinhentos(new SemDesconto())).calcula(orcamento);
+        Desconto desconto = Desconto.link(new SemDesconto(),
+                new DescontoQuantidadeCincoOuMaior(),
+                new DescontoValorMaiorQueQuinhentos());
+
+        return desconto.calcula(orcamento);
     }
 
 }
