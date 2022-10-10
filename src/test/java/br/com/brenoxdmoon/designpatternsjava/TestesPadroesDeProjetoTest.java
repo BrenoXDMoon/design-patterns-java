@@ -4,6 +4,8 @@ import br.com.brenoxdmoon.designpatternsjava.core.desconto.CalculadoraDeDesconto
 import br.com.brenoxdmoon.designpatternsjava.core.domain.entity.Orcamento;
 import br.com.brenoxdmoon.designpatternsjava.core.imposto.CalculadoraDeImpostos;
 import br.com.brenoxdmoon.designpatternsjava.core.imposto.impl.ICMS;
+import br.com.brenoxdmoon.designpatternsjava.core.pedido.handler.GeraPedidoHandler;
+import br.com.brenoxdmoon.designpatternsjava.core.pedido.impl.GeraPedido;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,6 +31,18 @@ class TestesPadroesDeProjetoTest {
         CalculadoraDeDescontos calculadoraDeDescontos = new CalculadoraDeDescontos();
         Assertions.assertNotNull(calculadoraDeDescontos.calculaDesconto(orcamento));
         Assertions.assertNotNull(calculadoraDeDescontos.calculaDesconto(orcamento2));
+    }
+
+    @Test
+    void testePedidos() {
+        String cliente = "Breno";
+        BigDecimal valorOrcamento = BigDecimal.valueOf(1000);
+        Integer quantidadeItens = 1;
+
+        GeraPedido geraPedido = new GeraPedido(cliente, valorOrcamento, quantidadeItens);
+        GeraPedidoHandler handler = new GeraPedidoHandler();
+        handler.executa(geraPedido);
+
     }
 
 
